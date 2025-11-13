@@ -98,7 +98,7 @@ class CheckClusterUpgradesFunction(BaseFunction):
 
     async def _discover_clusters(self, kubeconfig: str) -> List[Dict[str, Any]]:
         """Discover available clusters using kubectl."""
-        cmd = ["kubectl", "config", "get-contexts", "-o", "json"]
+        cmd = ["kubectl", "config", "get-contexts", "-o", "name"]
         if kubeconfig:
             cmd.extend(["--kubeconfig", kubeconfig])
 
@@ -108,16 +108,12 @@ class CheckClusterUpgradesFunction(BaseFunction):
             print(f"Error discovering clusters: {result['stderr']}")
             return []
 
-        try:
-            contexts = json.loads(result["stdout"])["contexts"]
-            return [
-                {"name": context["name"], "context": context["name"]}
-                for context in contexts
-                if "wds" not in context["name"]
-            ]
-        except (json.JSONDecodeError, KeyError) as e:
-            print(f"Error parsing kubectl contexts: {e}")
-            return []
+        contexts = result["stdout"].strip().split("\n")
+        return [
+            {"name": context, "context": context}
+            for context in contexts
+            if "wds" not in context
+        ]
 
     async def _get_cluster_upgrade_status(
         self, cluster: Dict[str, Any], latest_version: str, kubeconfig: str
