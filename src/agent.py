@@ -438,7 +438,8 @@ For pod counts, respond like this:
 - Count actual resources in the data
 - If data shows namespaces only, state that pod count data is not available
 - Never guess or make up numbers
-- Present information clearly and concisely"""
+- Present information clearly and concisely
+- When a user asks for a specific resource by name (e.g., "show me all deployments named api-server"), you MUST use the `namespace_utils` tool with the `resource_name` parameter. Do NOT use any other tool for this purpose."""
 
     def _present_plan(self):
         """Present the execution plan to the user for approval."""
