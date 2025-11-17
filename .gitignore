@@ -37,7 +37,6 @@ Thumbs.db
 *.log
 .env
 .env.local
-a2a.spec
 
 # uv
 .uv/
