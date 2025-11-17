@@ -74,7 +74,7 @@ uv run kubestellar agent --provider openai
 
 ## Binary Installation
 
-You can also build and install `kubestellar` as a standalone binary. This will also create aliases for `kubectl` and `ks`.
+If you prefer to build `kubestellar` from source and install it manually, follow these steps. This process will create a standalone binary and its aliases (`ks`, `kubectl-a2a`).
 
 1.  **Install PyInstaller:**
 
@@ -96,6 +96,25 @@ You can also build and install `kubestellar` as a standalone binary. This will a
     cp kubestellar kubectl-a2a
     sudo mv kubestellar ks kubectl-a2a /usr/local/bin/
     ```
+
+## Automatic Installation (Mac & Linux)
+
+For a quick and automated installation on macOS and Linux, you can use the `install.sh` script. This script will download the appropriate pre-built binary for your operating system from GitHub Releases, and set up the `kubestellar` CLI along with its `ks` and `kubectl-a2a` aliases.
+
+**Note:** This script relies on pre-built binaries being available in GitHub Releases. If you are developing or want to build from source, refer to the "Manual Binary Installation" section below.
+
+```bash
+curl -sL https://github.com/kubestellar/a2a/releases/latest/download/install.sh | bash
+```
+
+Alternatively, you can clone the repository and run the script:
+
+```bash
+git clone https://github.com/kubestellar/a2a.git
+cd a2a
+chmod +x install.sh
+./install.sh
+```
 
 ## MCP Server Setup
 
