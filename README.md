@@ -72,6 +72,31 @@ uv run kubestellar agent --provider gemini
 uv run kubestellar agent --provider openai
 ```
 
+## Binary Installation
+
+You can also build and install `kubestellar` as a standalone binary. This will also create aliases for `kubectl` and `ks`.
+
+1.  **Install PyInstaller:**
+
+    ```bash
+    uv pip install pyinstaller
+    ```
+
+2.  **Build the binaries:**
+
+    ```bash
+    python -m PyInstaller --name kubestellar --onefile --console src/cli.py
+    ```
+
+3.  **Create aliases and move to bin directory:**
+
+    ```bash
+    cd dist
+    cp kubestellar ks
+    cp kubestellar kubectl-a2a
+    sudo mv kubestellar ks kubectl-a2a /usr/local/bin/
+    ```
+
 ## MCP Server Setup
 
 Add to MCP server (`~/Library/Application Support/Claude/claude_desktop_config.json`):
